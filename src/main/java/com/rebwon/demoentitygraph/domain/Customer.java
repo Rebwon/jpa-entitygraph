@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -16,12 +18,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NamedEntityGraph(
-	name = "customer-with-orders",
-	attributeNodes = {
-		@NamedAttributeNode("orders")
-	}
-)
+@NamedEntityGraphs({
+	@NamedEntityGraph(
+		name = "customer-with-orders",
+		attributeNodes = {
+			@NamedAttributeNode("orders")
+		}
+
+	),
+	@NamedEntityGraph(
+		name = "customer-with-orders-and-details",
+		attributeNodes = {
+			@NamedAttributeNode(value = "orders", subgraph = "order-details"),
+		},
+
+		subgraphs = {@NamedSubgraph(
+			name = "order-details",
+			attributeNodes = {
+				@NamedAttributeNode("orderDetail")
+			}
+		)}
+	)
+})
 
 @Entity
 @Getter

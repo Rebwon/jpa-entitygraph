@@ -18,4 +18,9 @@ class CustomerRepositoryTest {
 	void findEntityGraph() {
 		customerRepository.findWithGraph(1, "customer-with-orders");
 	}
+
+	@Test
+	void findEntityGraphSubGraph() {
+		customerRepository.findWithGraph(2, "customer-with-orders-and-details");
+	}
 }
