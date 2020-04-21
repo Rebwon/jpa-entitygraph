@@ -1,4 +1,5 @@
 spring:
+  # Data Config
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -8,6 +9,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  h2:
-    console:
-      enabled: true
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/company
+    username: root
+    password: password
